@@ -124,7 +124,7 @@ def calc_root_totlas(tree_ditc, root_path):
 
 def working_node_total(working_node, fl_type):
     """
-    calculates total directory file size or file count 
+    calculates total directory file size or file count
     if '_' appears in fl_type total '_Cn' values
     otherwise total file size types
     """
@@ -184,10 +184,12 @@ def build_dir_tree(tree_ditc, working_node, fl_type, level, max_level):
     return build
 
 
-def convert_csv_2_flare(csv_in, json_out, root_path=None):
+def convert_csv_2_flare(csv_in, json_out, fl_type='total', max_level=3, root_path=None):
     print 'Start convert csv to flare json'
+    print 'csv_in:', csv_in, 'json_out:', json_out, \
+        'fl_type:', fl_type, 'root_path:', root_path
     # lode data from csv file
-    tree_ditc = csv_2_tree_path_dicts(csv_in)  # FSHistory_Dojo    
+    tree_ditc = csv_2_tree_path_dicts(csv_in)
     if root_path is None:
         # calculate commoun base path
         root_path = find_root_dir(tree_ditc)
@@ -201,7 +203,7 @@ def convert_csv_2_flare(csv_in, json_out, root_path=None):
     # stare with root node
     working_node = {'name': root_path, 'node': tree_ditc[root_path]}
     level = 0
-    dir_tree = build_dir_tree(tree_ditc, working_node, 'total', level, 4)
+    dir_tree = build_dir_tree(tree_ditc, working_node, fl_type, level, max_level)
     # out put dir_tree as json file
     write_2_jsonfile(dir_tree, json_out)
     print 'Done convert csv to flare json'
@@ -209,15 +211,16 @@ def convert_csv_2_flare(csv_in, json_out, root_path=None):
     #######################
     #'FSHistory_Dojo.csv'
 
-
-convert_csv_2_flare('FSHistory_Dojo.csv', 'flare_data.json', "C:/work/Dojo")
+convert_csv_2_flare('FSHistory_Dojo.csv', 'flare_data.json', root_path="C:/work/Dojo")  #root_path="C:/work/Dojo"
 
 '''
 TODO:
     xx git
-    oo 1
+    xx add comments
+    convert to a object 1
     unittest 1
     xx maim > convert_csv_2_flare(csv_in, json_out, root_path = null) 1.5
+        added main orchestration function convert_csv_2_flare
     readme.md 1.5
     github as website index.html... 2
     leve 3 shows ???
