@@ -221,8 +221,8 @@ TODO:
     unittest 1
     xx maim > convert_csv_2_flare(csv_in, json_out, root_path = null) 1.5
         added main orchestration function convert_csv_2_flare
+    xx exposed top level parameters to convert_csv_2_flare
     readme.md 1.5
     github as website index.html... 2
-    leve 3 shows ???
+    D3 stuff leve 3 shows ???
 '''
-
