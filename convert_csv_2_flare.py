@@ -5,7 +5,7 @@ a hierarchically embedded treee format used by mbostocks D3 treemap
 referred to as flare.json see:
 http://mbostock.github.io/d3/talk/20111018/treemap.html
 
-python
+python 2.7
 Created on Oct 26, 2016
 @author: jayventi
 convert_csv_2_flare.py
@@ -216,8 +216,9 @@ if __name__ == "__main__":
 TODO:
     xx git
     xx add comments
-    xx convert to a object ername main file  1
+    xx convert to a object ername main file convert_csv_2_flare.py
     unittest 1
+    use system deftes
     xx maim > convert_csv_2_flare(csv_in, json_out, root_path = null) 1.5
         added main orchestration function convert_csv_2_flare
     xx exposed top level parameters to convert_csv_2_flare
