@@ -40,6 +40,7 @@ class TestConvertCsv2Flare(unittest.TestCase):
     def ospath_expdict_pos_2_win(self, expected_dict):
         #test
         actual = False
+        
         expected = True
         self.assertEqual(actual, expected)
 
