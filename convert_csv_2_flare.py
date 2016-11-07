@@ -180,14 +180,14 @@ class ConvertCsv2Flare(object):
             if 'total' in fl_type:
                 build["size"] = self.working_node_total(working_node, fl_type)
             else:
-                build["size"] = working_node['node'][fl_type]
+                build["size"] = int(working_node['node'][fl_type])
         level -= 1
         return build
 
-    def main(self, csv_in, json_out, fl_type='total', max_level=3, root_path=None):
-        print 'Start convert csv to flare json'
-        print 'csv_in:', csv_in, 'json_out:', json_out, \
-            'fl_type:', fl_type, 'root_path:', root_path
+    def main(self, csv_in, json_out, fl_type='total', max_level=1, root_path=None):
+        #print 'Start convert csv to flare json'
+        #print 'csv_in:', csv_in, 'json_out:', json_out, \
+        #    'fl_type:', fl_type, 'root_path:', root_path
         # lode data from csv file
         tree_ditc = self.csv_2_tree_path_dicts(csv_in)
         if root_path is None:
@@ -217,12 +217,13 @@ TODO:
     xx git
     xx add comments
     xx convert to a object ername main file convert_csv_2_flare.py
-    unittest 1
-    use system deftes
+    xxx unittest
     xx maim > convert_csv_2_flare(csv_in, json_out, root_path = null) 1.5
         added main orchestration function convert_csv_2_flare
     xx exposed top level parameters to convert_csv_2_flare
-    readme.md 1.5
-    github as website index.html... 2
     D3 stuff leve 3 shows ???
+        zoom able
+        total, type
+    github as website index.html... 2
+    readme.md 1.5
 '''

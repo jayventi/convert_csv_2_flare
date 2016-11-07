@@ -13,7 +13,7 @@ from json import load
 from convert_csv_2_flare import *
 
 """
-test setup  depends  on manual creation of the following
+Test setup  depends on virtual filesystem layout as following
 directories and files
 1 - testdirs
 |___ File_A.txt    1024 b
@@ -24,7 +24,6 @@ directories and files
       |___ File_D.tar    52,428,800 b
       |___ 4 - testdirs/subDirFoo/subDirBar
           |___ File_E.py    1024 b
-these files are provided for testing in testdirs.zip
 """
 
 
@@ -78,8 +77,7 @@ class TestConvertCsv2Flare(unittest.TestCase):
         test_dict = {u'1': u'123'}
         self.converter.write_2_jsonfile(test_dict, 'test_write_2_json.test')
         with open('test_write_2_json.test') as data_file:
-            data = load(data_file)
-        actual = data
+            actual = load(data_file)
         expected = test_dict
         self.assertEqual(actual, expected)
 
@@ -133,12 +131,12 @@ class TestConvertCsv2Flare(unittest.TestCase):
         self.converter.calc_root_totlas(tree_ditc, root_path)
         actual = tree_ditc['testdirs']
         expected = {'ps': 0, 'csv': 50000000, 'log_Cn': 1, 'log': 50000000, 'zip': 0, 'other_Cn': 2, 'ps_Cn': 0, 'js_Cn': 0, 'js': 0,
-                    'zip_Cn': 0, 'other': 52429824, 'zz_level': 2, 'sql_Cn': 0, 'sql': 0, 'csv_Cn': 1, 'txt_Cn': 0, 'txt': 0, 'root': True, 
+                    'zip_Cn': 0, 'other': 52429824, 'zz_level': 2, 'sql_Cn': 0, 'sql': 0, 'csv_Cn': 1, 'txt_Cn': 0, 'txt': 0, 'root': True,
                     'children': ['subDirBoo', 'subDirFoo']}
         self.assertEqual(actual, expected)
 
     def test_10_working_node_total_fixed(self):
-        # test fixed type in this case 'log'
+        # test total size
         #setup
         test_file = "FSHistory_test.csv"
         tree_ditc = self.converter.csv_2_tree_path_dicts(test_file)
@@ -148,12 +146,12 @@ class TestConvertCsv2Flare(unittest.TestCase):
         self.converter.calc_root_totlas(tree_ditc, root_path)
         #test
         working_node = {'name': 'testdirs/subDirBoo', 'node': tree_ditc['testdirs/subDirBoo']}
-        actual = self.converter.working_node_total(working_node, 'log')
+        actual = self.converter.working_node_total(working_node, 'total')
         expected = 100000000
         self.assertEqual(actual, expected)
 
     def test_10_working_node_total_total(self):
-        # test total all types 
+        # test total counts use "_Cn"
         #setup
         test_file = "FSHistory_test.csv"
         tree_ditc = self.converter.csv_2_tree_path_dicts(test_file)
@@ -163,39 +161,83 @@ class TestConvertCsv2Flare(unittest.TestCase):
         self.converter.calc_root_totlas(tree_ditc, root_path)
         #test
         working_node = {'name': 'testdirs/subDirBoo', 'node': tree_ditc['testdirs/subDirFoo']}
-        actual = self.converter.working_node_total(working_node, 'total')
-        print actual
-        expected = 52429824
-        self.assertEqual(actual, expected)
-'''
-    def test_11_build_dir_tree_a(self):
-        #setup
-        #test
-        actual = False
-        expected = True
+        actual = self.converter.working_node_total(working_node, '_Cn')
+        expected = 2
         self.assertEqual(actual, expected)
 
-    def test_10_build_dir_tree_b(self):
+    def build_dir_tree_leaf_setup(self, fl_type):
         #setup
+        test_file = "FSHistory_test.csv"
+        tree_ditc = self.converter.csv_2_tree_path_dicts(test_file)
+        root_path = self.converter.find_root_dir(tree_ditc)
+        self.converter.add_root(tree_ditc, root_path)
+        self.converter.calc_children(tree_ditc)
+        self.converter.calc_root_totlas(tree_ditc, root_path)
+        working_node = {'name': 'testdirs/subDirBoo', 'node': tree_ditc['testdirs/subDirFoo']}
         #test
-        actual = False
-        expected = True
+        actual = self.converter.build_dir_tree(tree_ditc, working_node, fl_type, 1, 3)
+        return actual
+
+    def test_11_build_dir_tree_leaf_total_Cn(self):
+        #test
+        fl_type = 'total_Cn'  # 'other' #'total'
+        actual = self.build_dir_tree_leaf_setup(fl_type)
+        expected = {'name': 'testdirs/subDirBoo', 'size': 2}
         self.assertEqual(actual, expected)
 
-    def test_11_main_a(self):
-        #setup
+    def test_11_build_dir_tree_leaf_other(self):
         #test
-        actual = False
-        expected = True
+        fl_type = 'other'  # 'total_Cn' #'total'
+        actual = self.build_dir_tree_leaf_setup(fl_type)
+        expected = {'name': 'testdirs/subDirBoo', 'size': 52429824}
         self.assertEqual(actual, expected)
 
-    def test_11_main_2(self):
-        #setup
+    def test_11_build_dir_tree_leaf_total(self):
         #test
-        actual = False
-        expected = True
+        fl_type = 'total'  # 'other' #'total_Cn'
+        actual = self.build_dir_tree_leaf_setup(fl_type)
+        expected = {'name': 'testdirs/subDirBoo', 'size': 52429824}
         self.assertEqual(actual, expected)
-'''
+
+    def test_11_build_dir_tree_node(self):
+        #setup
+        test_file = "FSHistory_test.csv"
+        tree_ditc = self.converter.csv_2_tree_path_dicts(test_file)
+        root_path = self.converter.find_root_dir(tree_ditc)
+        self.converter.add_root(tree_ditc, root_path)
+        self.converter.calc_children(tree_ditc)
+        self.converter.calc_root_totlas(tree_ditc, root_path)
+        working_node = {'name': 'testdirs', 'node': tree_ditc['testdirs']}
+        #test
+        actual = self.converter.build_dir_tree(tree_ditc, working_node, 'total', 0, 3)
+        expected = {'name': 'testdirs', 'children': [{'name': 'testdirs/subDirBoo', 'size': 100000000},
+                   {'name': 'testdirs/subDirFoo', 'size': 52429824}]}
+        self.assertEqual(actual, expected)
+
+    def test_12_main_1(self):
+        #setup
+        csv_in = 'FSHistory_test.csv'
+        json_out = 'test_write_2_json.test'
+        #test
+        self.converter.main(csv_in, json_out)
+        with open(json_out) as data_file:
+            actual = load(data_file)
+        expected = {u'name': u'testdirs', u'children': [{u'name': u'testdirs/subDirBoo', u'size': 100000000},
+                   {u'name': u'testdirs/subDirFoo', u'size': 52429824}]}
+        self.assertEqual(actual, expected)
+
+    def test_12_main_2(self):
+        #setup
+        csv_in = 'FSHistory_test.csv'
+        json_out = 'test_write_2_json.test'
+        #test
+        self.converter.main(csv_in, json_out, fl_type='total_Cn', max_level=2, root_path='testdirs')
+        with open(json_out) as data_file:
+            actual = load(data_file)
+        expected = {u'name': u'testdirs', u'children': [{u'name': u'testdirs/subDirBoo', u'size': 2},
+                   {u'name': u'testdirs/subDirFoo', u'size': 2}]}
+        self.assertEqual(actual, expected)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
