@@ -184,7 +184,7 @@ class ConvertCsv2Flare(object):
         level -= 1
         return build
 
-    def main(self, csv_in, json_out, fl_type='total', max_level=1, root_path=None):
+    def main(self, csv_in, json_out, fl_type='total', max_level=5, root_path=None):
         #print 'Start convert csv to flare json'
         #print 'csv_in:', csv_in, 'json_out:', json_out, \
         #    'fl_type:', fl_type, 'root_path:', root_path
@@ -210,7 +210,7 @@ class ConvertCsv2Flare(object):
 
 if __name__ == "__main__":
     converter = ConvertCsv2Flare()
-    converter.main('FSHistory_Dojo.csv', 'flare_data.json')  # root_path="C:/work/Dojo"
+    converter.main('FS_phpmyadmin4.csv', 'flare_data_phpmyadmin.json')  # root_path="C:/work/Dojo"
 
 '''
 TODO:
