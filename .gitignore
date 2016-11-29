@@ -3,8 +3,8 @@ csv
 *.csv
 
 # json
-json
-*.json
+#json
+#*.json
 
 # Coverage directory used by tools like istanbul
 coverage
