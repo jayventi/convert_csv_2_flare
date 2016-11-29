@@ -221,9 +221,9 @@ TODO:
     xx maim > convert_csv_2_flare(csv_in, json_out, root_path = null) 1.5
         added main orchestration function convert_csv_2_flare
     xx exposed top level parameters to convert_csv_2_flare
-    D3 stuff leve 3 shows ???
-        zoom able
+    xx D3 stuff leve 3 shows ???
+        xx zoom able
         total, type
-    github as website index.html... 2
+    xx github as website index.html... 2
     readme.md 1.5
 '''

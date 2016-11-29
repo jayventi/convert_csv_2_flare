@@ -1,6 +1,6 @@
 # csv
-csv
-*.csv
+#csv
+#*.csv
 
 # json
 #json
@@ -17,5 +17,4 @@ coverage
 
 # Python
 *.pyc
-
 
