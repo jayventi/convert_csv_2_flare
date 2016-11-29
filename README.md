@@ -3,22 +3,22 @@
 ##[D3 Zoomable Treemap of Directory Space Usage](https://jayventi.github.io/convert_csv_2_flare/index.html)##
 
 ### Description ###
-This is a tool to produce a D3 zoomable treemap visualization of directory space utilization and a data file conversion utility to support the D3 graphics. The general idea is to ultimately build a utility which monitors ongoing space utilization from a flat file data store systems. This is part of a two-part project the first part [storagestats](https://github.com/jayventi/storagestats). calculates space usage on a per file type basis which is configurable, and produce a a csv output file containing usage statistics. This utility converts the csv to a flare json format which is consumed by the D3 treatment provided by bbb at url. The conversion utility is written in Pyhon and the interactive D3 graphic is provided as the index.html based on the original [D3 zoomable treemap graph](http://mbostock.github.io/d3/talk/20111018/treemap.html).
+This is a tool to produce a D3 zoomable treemap visualization of directory space utilization and a data file conversion utility to support the D3 graphics. The general idea is to ultimately build a utility which monitors ongoing space utilization from a flat file data store systems. convert_csv_2_flare is part of a two-part project the first part [storagestats](https://github.com/jayventi/storagestats) calculates space usage on a per file type basis which is configurable, and produce a CSV output file containing usage statistics. This utility converts the CSV to a flare json format which is consumed by the D3 treemap. The D3 treemap graphic index.html is based on Mike Bostock's original [D3 zoomable treemap graph](http://mbostock.github.io/d3/talk/20111018/treemap.html).
 
-These are building blocks which are intended to be used in a dashboard setting where the basic storagestats utility would run in a Cron script generate updated csv data files which would be consumed by a dynamic site to produce the D3 graphics. 
+These are building blocks which are intended to be used in a dashboard setting where the storagestats utility would run in a Cron script generate updated CSV data files which would be consumed by a dynamic site to produce the D3 graphics. 
 
 The example graphic shows the space utilization for the open source phpmyadmin4.1.14 project.
 
 ###Overview Of Workflow###
 
-The workflow starts with the generation of the csv storage statistics datafile. This files is produced by the commandline utility storagestats.py which resides in the [storagestats](https://github.com/jayventi/storagestats) repository. See the projects readme file for commandline parameters.
+The workflow starts with the generation of the CSV storage statistics datafile. This file is produced by the command line utility storagestats.py which resides in the [storagestats](https://github.com/jayventi/storagestats) repository. See the project's readme file for command line parameters.
 
-The convert_csv_2_flare.py program fully converts the csv to the D3 flare json file form. this utility consumes the csv and produces a fair json file. The utility is configurable by setting the parameters in the main() method see below for details.
+The convert_csv_2_flare.py program fully converts the CSV to the D3 flare json file form. This utility consumes the CSV and produces a flair json file. The utility is configurable by setting the parameters in the main() method see below for details.
 
 The D3 treemap graphic is produced by the [index.html](https://jayventi.github.io/convert_csv_2_flare/index.html) file. 
 
 ####Converting CSV Data File to Treemap Flare Json format####
-Conversion is performed by the single file convert_csv_2_flare.py utility. consists of a single object with a main method which orchestrates conversion configurable by five main parameters. It is executed the command line as: 
+Conversion is performed by the single file utility convert_csv_2_flare.py. convert_csv_2_flare.py consists of a single object with a main() method which orchestrates conversion configurable by five main parameters. It is executed the command line as: 
     python convert_csv_2_flare.py 
 
 ##### Main Procedure Parameters #####
@@ -31,11 +31,11 @@ csv_in : is the name of the input data CSV file.
 
 json_out: name of output flair json five used by the D3 treemap.
 
-fl_type: file summation specifier, specifies values to be some there are two classes direct space counts in bit, and file counts in number of files. Further files may be summed in total or by any of several types specified in the csv datafile. Summations the occur for any given file specifier. For instance all .log files may be summed up the new structure independent of other file types. Type 'other' and total is always present. The treemap only totals one specific file in the indices at a time. Examples of allowable, specifiers are ['total','total_Cn','other_Cn', 'other_Cn', 'log', 'log_Cn'] etc. log or anything besides total and other are dependent on the configuration parameters used to generate the csv datafile from the storagestats utility.
+fl_type: file summation specifier, specifies values to be some there are two classes direct space counts in bits, and file count in number of files. Further files may be summed in total or by any of several types specified in the CSV data file. Summations the occur for any given file specifier. For instance all .log files may be summed up the new structure independent of other file types. Type 'other' and total is always present. The treemap only displays one particular file in the indices at a time. Examples of allowable, specifiers are ['total', 'total_Cn', 'other_Cn', 'other_Cn', 'log', 'log_Cn'] etc. log or anything besides total and other are dependent on the configuration parameters used to generate the CSV datafile from the storagestats utility.
 
- max_level: gives the number of subdirectories to output into the flair for default set to five. The depth is given less than total depth available space and file count are given for the last directories appearing which will treated as 'leaf' directories. The tree is shorter in any given branch than the level count given no harm will occur in all directories and those branches will be output.
+ max_level: gives the number of subdirectories to output into the flair file, default set to five. If the depth given is less than total depth available space and file count is provided for the last directories appearing which will be treated as a 'leaf' directories. The tree is shorter in any given branch than the level count provided no harm will occur in all directories, and those branches will be output.
  
-root_path: the root directory may in itself a long given from the filesystem root if the time the path is known to the common root and may be given if not it will be calculated. The point of this parameter is the same overhead of calculating the roof which for deep paths could be nontrivial.
+root_path: the root directory may in itself along given from the filesystem root if the time the path is known to the common root and may be given if not it will be calculated. The point of this parameter is the same overhead of calculating the roof which for deep paths could be nontrivial.
 
 ### Bill of Material ###
 First three utilities generate files used by later steps
@@ -72,5 +72,4 @@ Replace flare_data_phpmyadmin.json with one of the other example flare json file
 
 2) Expose parameters as external command line utility parameters
 
-3) Place in a dynamic node server,uUse data factories capable of calling the convert_csv_2_flare.py using the exposed parameters to request different file type summations, exposed choices in treemap webpage.
-
+3) Place in a dynamic node server,uUse data factories capable of calling the convert_csv_2_flare.py using the exposed parameters to request different file type summations, presented choices in treemap webpage.
