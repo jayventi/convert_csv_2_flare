@@ -23,9 +23,9 @@ Conversion is performed by the single file utility convert_csv_2_flare.py. conve
     python convert_csv_2_flare.py 
 ```
 ##### Main Procedure Parameters #####
-Prototype for the main method is
+Prototype for the main method is:
 ```Python
-    main(self, csv_in, json_out, fl_type='total', max_level=5, root_path=None)
+main(self, csv_in, json_out, fl_type='total', max_level=5, root_path=None)
 ```
 All files are assumed to be in the same directory as the convert_csv_2_flare.py file.
 
@@ -40,16 +40,14 @@ fl_type: file summation specifier, specifies values to be some there are two cla
 root_path: the root directory may in itself along given from the filesystem root if the time the path is known to the common root and may be given if not it will be calculated. The point of this parameter is the same overhead of calculating the roof which for deep paths could be nontrivial.
 
 ### Bill of Material ###
-First three utilities generate files used by later steps
 ```
-
 FS_*.csv: 
 These are the space usage data files output by storagestats. it is the 
 responsibility of the developer to see to it that these files are 
 located in the directory where the convert_csv_2_flare.py utility 
 resides.
 
-convert_csv_2_flare.py: Actual file utility.
+convert_csv_2_flare.py: Actual Python utility.
 
 test_convert_csv_2_flare.py: 
 Unit test fixture for convert_csv_2_flare.py.
@@ -66,15 +64,13 @@ Unit test support is provided by test_convert_csv_2_flare.py which is built on t
 
 
 ###D3 Example Treemap visualization###
-To switch example flare json files edit in index.html the line:
+To switch example flare json file edit in index.html the line:
 ```JavaScript
-    var fileName = "flare_data_phpmyadmin.json";
+var fileName = "flare_data_phpmyadmin.json";
 ```
 Replace flare_data_phpmyadmin.json with one of the other example flare json files.
 
 ###TODO###
 1) Add hover over feature to give statistics on a given directory.
-
 2) Expose parameters as external command line utility parameters
-
 3) Place in a dynamic node server,uUse data factories capable of calling the convert_csv_2_flare.py using the exposed parameters to request different file type summations, presented choices in treemap webpage.
