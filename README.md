@@ -20,14 +20,13 @@ The D3 treemap graphic is produced by the [index.html](https://jayventi.github.i
 ####Converting CSV Data File to Treemap Flare Json format####
 Conversion is performed by the single file utility convert_csv_2_flare.py. convert_csv_2_flare.py consists of a single object with a main() method which orchestrates conversion configurable by five main parameters. It is executed the command line as:
 ```Shell
-        python convert_csv_2_flare.py 
+    python convert_csv_2_flare.py 
 ```
 ##### Main Procedure Parameters #####
 Prototype for the main method is
 ```Python
     main(self, csv_in, json_out, fl_type='total', max_level=5, root_path=None)
 ```
-
 All files are assumed to be in the same directory as the convert_csv_2_flare.py file.
 
 csv_in : is the name of the input data CSV file. 
@@ -45,8 +44,8 @@ First three utilities generate files used by later steps
 
 FS_*.csv: 
 these are the space usage data files output by storagestats. it is the responsibility of the developer to see to it that these files are located in the directory where the convert_csv_2_flare.py utility resides.
-
-convert_csv_2_flare.py: actual file utility.
+```
+convert_csv_2_flare.py:``` actual file utility.
 
 test_convert_csv_2_flare.py: unit test fixture for convert_csv_2_flare.py
 
