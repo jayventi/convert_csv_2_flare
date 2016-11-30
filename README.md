@@ -19,12 +19,14 @@ The D3 treemap graphic is produced by the [index.html](https://jayventi.github.i
 
 ####Converting CSV Data File to Treemap Flare Json format####
 Conversion is performed by the single file utility convert_csv_2_flare.py. convert_csv_2_flare.py consists of a single object with a main() method which orchestrates conversion configurable by five main parameters. It is executed the command line as:
-``` 
-python convert_csv_2_flare.py 
+```Shell
+        python convert_csv_2_flare.py 
 ```
 ##### Main Procedure Parameters #####
 Prototype for the main method is
+```Python
     main(self, csv_in, json_out, fl_type='total', max_level=5, root_path=None)
+```
 
 All files are assumed to be in the same directory as the convert_csv_2_flare.py file.
 
@@ -65,7 +67,9 @@ Unit test support is provided by test_convert_csv_2_flare.py which is built on t
 
 ###D3 Example Treemap visualization###
 To switch example flare json files edit in index.html the line:
+```JavaScript
     var fileName = "flare_data_phpmyadmin.json";
+```
 Replace flare_data_phpmyadmin.json with one of the other example flare json files.
 
 ###TODO###
