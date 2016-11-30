@@ -45,23 +45,23 @@ First three utilities generate files used by later steps
 FS_*.csv: 
 these are the space usage data files output by storagestats. it is the responsibility of the developer to see to it that these files are located in the directory where the convert_csv_2_flare.py utility resides.
 ```
-convert_csv_2_flare.py: actual file utility.
+    convert_csv_2_flare.py: actual file utility.
 
-test_convert_csv_2_flare.py: unit test fixture for convert_csv_2_flare.py
+    test_convert_csv_2_flare.py: unit test fixture for convert_csv_2_flare.py
 
-FSHistory_test.csv: required csv test file.
+    FSHistory_test.csv: required csv test file.
 
-flare_*.json: flare json output files consumable by D3 treemap graphics.
+    flare_*.json: flare json output files consumable by D3 treemap graphics.
 
-index.html: html and JavaScript contains D3 JavaScript produces zoomable Treemap
+    index.html: html and JavaScript contains D3 JavaScript produces zoomable Treemap
 
-generate_e_one_digit_at_a_time.py
-Generates e one digit at a time, found code see header for source. Generates files of the form e_digit_{size}.txt
+    generate_e_one_digit_at_a_time.py
+    Generates e one digit at a time, found code see header for source. Generates files of the form e_digit_{size}.txt
 
-prime_file_list_2_dict.py
-Helper file not strictly necessary converts the lists of prime numbers founded in primes_sieve_{size}.json into a dictionary format for fast lookup. Files generated are in a form primes_sieve_ditc_{size}.json
-###Unittest Support##
-Unit test support is provided by test_convert_csv_2_flare.py which is built on the unittest framework. It requires a test input data file FSHistory_test.csv which is provided.
+    prime_file_list_2_dict.py
+    Helper file not strictly necessary converts the lists of prime numbers founded in primes_sieve_{size}.json into a dictionary format for fast lookup. Files generated are in a form primes_sieve_ditc_{size}.json
+    ###Unittest Support##
+    Unit test support is provided by test_convert_csv_2_flare.py which is built on the unittest framework. It requires a test input data file FSHistory_test.csv which is provided.
 ```
 
 ###D3 Example Treemap visualization###
