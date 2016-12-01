@@ -68,7 +68,7 @@
     <script type="text/javascript">
 
 var fileName = "flare_data_phpmyadmin.json";
-var filenam = d3.select('#datafile').data(fileName);
+var filenam = d3.select('#datafile');
     filenam.text(fileName).style("width 100 px");
 
 var w = 1280 - 80,
@@ -101,7 +101,7 @@ d3.json(fileName, function(data) {
   node = root = data;
   console.log("Full name "+topicText(node.name));
   
-  var topic = d3.select('#topic').data(topicText(node.name));
+  var topic = d3.select('#topic');
     topic.text(topicText(node.name)).style("width 100 px");
   
   var nodes = treemap.nodes(root)
