@@ -129,7 +129,7 @@ d3.json(fileName, function(data) {
       .attr("dy", ".35em")
       .attr("text-anchor", "middle")
       .text(function(d) { return dsplayText(d.name); })
-      .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 1; });
+      .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
 
   d3.select(window).on("click", function() { zoom(root); });
 
